@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= stylesheet_link_tag "style" %>
     <title>SNS</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -17,7 +18,12 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
+  <div id = "header">
+    <h1>Welcome to the SNS World</h1>
+    <h3>Blogs powered by Ruby on Rails</h3>
+  </div>
 
-    <%= yield %>
+<%= yield %>
+
   </body>
 </html>
