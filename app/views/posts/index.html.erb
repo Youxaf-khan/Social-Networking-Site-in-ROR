@@ -2,16 +2,20 @@
 <%= link_to "New Post", new_post_path %>
 <br>
 <br>
-
-
 <% @posts.each do |post| %>
 <h2> <%= post.title %> </h2>
 <div> <%= truncate(post.description,:length => 35) %> </div>
 <br>
+<div class="form-group">
+  <% if post.image.attached? %>
+   <%= image_tag post.image, style: "width: 200px; display: block" %>
+   <% end %>
+</div>
+<br/>
 <%= link_to "Read Post", post %>
-<% end %>
-
-
+<br/>
+<br/>
+<%end%>
 <div class="actions">
     <%= button_to "logout", destroy_user_session_path, method: :delete , class: 'btn btn-primary' %>
 </div>

@@ -2,6 +2,12 @@
 <div>
   <%= @post.description %>
 </div>
+<br>
+<% if @post.image.attached?%>
+  <p>
+    <%= image_tag @post.image.variant(resize: "250x250") %>
+  </p>
+  <% end %>
 
 <%= link_to "Edit Post", edit_post_path(@post) %>
-<%= link_to "Delete", post_path(@post), method: :delete, data:{confirm: "Are you sure?"} %>
+<%= button_to "Delete", post_path(@post), method: :delete %>
