@@ -1,4 +1,4 @@
-    class PostsController < ApplicationController
+  class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit ,:update, :destroy]
 
     def index
@@ -12,7 +12,6 @@
     def create
       @user = current_user
       @post = @user.posts.new(post_params)
-
       if @post.save
         redirect_to @post
       else
