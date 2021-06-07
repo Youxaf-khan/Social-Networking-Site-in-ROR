@@ -1,13 +1,11 @@
   <p>
-    <strong>Commenter:</strong>
+    <strong>Name:</strong>
     <%= comment.commenter %>
   </p>
-
   <p>
     <strong>Comment:</strong>
     <%= comment.body %>
   </p>
-
-
-  <%= button_to "Delete Comment", post_comment_path(@post,comment), method: :delete, data:{confirm: "Are you sure?"} %>
+  <%= button_to "Delete Comment", post_comment_path(@post,comment),
+  method: :delete, data:{confirm: "Are you sure?"} %>
   <%= link_to "Edit ", edit_post_comment_path(@post,comment)%>

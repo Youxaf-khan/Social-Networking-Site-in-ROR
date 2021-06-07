@@ -1,8 +1,17 @@
   class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit ,:update, :destroy]
 
+    def search
+     if params[:search].blank?
+     redirect_to(root_path, alert: "Empty field!") and return
+     else
+      @parameter = params[:search].downcase
+      @results = Post.all.where("lower(title) LIKE :search", search: @parameter)
+     end
+    end
+
     def index
-      @posts = Post.all.order("created_at DESC")
+      @posts = Post.order("created_at DESC")
     end
 
     def new
@@ -10,10 +19,9 @@
     end
 
     def create
-      @user = current_user
-      @post = @user.posts.new(post_params)
+      @post = current_user.posts.new(post_params)
       if @post.save
-        redirect_to @post
+        redirect_to @post , notice: "Post is created succcessfully."
       else
         render :new
       end
@@ -24,21 +32,24 @@
     def edit; end
 
     def update
-     if @post.update(post_params)
-      redirect_to @post
-     else
-      render 'edit'
-     end
+      if @post.update(post_params)
+        redirect_to @post
+
+      else
+        render :edit
+      end
     end
 
     def destroy
-      if @post.user == current_user
+      # TODO: improve this and add instance method
+     if @post.user == current_user
       @post.destroy
       redirect_to root_path
-      else
+
+     else
         flash.notice = "This post belongs to someone else you are not authorized"
       redirect_to root_path
-      end
+     end
     end
 
     private

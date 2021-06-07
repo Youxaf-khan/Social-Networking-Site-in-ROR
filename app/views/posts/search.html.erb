@@ -1,0 +1,13 @@
+<h3> Search Results</h3>
+<br>
+<br>
+<% @results.each do |result| %>
+   <h2> <%= result.title %> </h2>
+   <div> <%= truncate(result.description,:length => 10) %> </div>
+   <br>
+  <div class="form-group">
+    <% if result.image.attached? %>
+    <%= image_tag result.image, style: "width: 200px; display: block" %>
+    <% end %>
+  </div>
+<% end %>

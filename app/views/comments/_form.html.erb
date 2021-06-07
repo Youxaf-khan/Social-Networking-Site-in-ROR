@@ -1,13 +1,13 @@
-<%= form_with model: [ @post, @post.comments.build] do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
+    <%= form_with model: [ @post, @post.comments.build] do |form| %>
+    <p>
+    <%= form.label :Name %><br>
     <%= form.text_field :commenter %>
-  </p>
-  <p>
-    <%= form.label :body %><br>
+    </p>
+    <p>
+    <%= form.label :Comment %><br>
     <%= form.text_area :body %>
-  </p>
-  <p>
+    </p>
+    <p>
     <%= form.submit %>
-  </p>
-<% end %>
+    </p>
+    <% end %>
