@@ -4,8 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     if test
-    @comment = @post.comments.create(comment_params)
-    redirect_to @post
+    @comment = @post.comments.create(comment_params.merge({user: current_user}))
     end
     redirect_to @post
   end
@@ -15,7 +14,7 @@ class CommentsController < ApplicationController
   def show;end
 
   def update
-    if @post.user == current_user
+    if test
       flash.notice = "You can't edit comments on your own post"
       redirect_to @post
 
@@ -28,17 +27,27 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+
+    if current_user == @comment.user
      @comment.destroy
      redirect_to root_path
+    else
+
+      flash.notice = "This Comment belongs to someone else"
+      redirect_to root_path
+    end
   end
 
   def test
     if @post.user == current_user
       flash.notice = "You can't comment on your own post"
       return false
-    else  @post.comments.count > 6
+    elsif  @post.comments.count > 4
+      byebug
       flash.notice = "A post can't have more than five comments"
       return false
+    else
+      return true
     end
 
 
