@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  root to:  'posts#index'
+  root to: 'posts#index'
 
-  devise_for  :users
+  devise_for :users
 
   resources :posts do
-  resources :comments
+    resources :comments
   end
 
-  get '/search', to: 'posts#search'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get :search, to: 'posts#search'
+  # TODO: check difference bw these
+  # get '/search', to: 'posts#search'
 end

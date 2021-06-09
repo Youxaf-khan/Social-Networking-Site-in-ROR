@@ -15,3 +15,16 @@
  */
 
 @import "bootstrap/scss/bootstrap";
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+div#header {
+   text-align: center;
+   padding-bottom: 15px;
+}
+
+a:link, a:active, a:visited {
+   color: #CD0000;
+}

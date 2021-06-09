@@ -2,17 +2,21 @@
 <br>
 <div class="row">
  <% @posts.each do |post| %>
-    <div class="card col-3">
-            <div class="card" style="width: 100%;">
-              <%if post.image.attached?%>
-                 <img src = <%= url_for(post.image) %> class="card-img-top" alt="Card image cap" >
-              <% end %>
+    <div id="del<%= post.id %>" class="card col-3"  >
+        <div class="card" style="width: 100%;">
+            <%if post.image.attached?%>
+                <img src = <%= url_for(post.image) %> class="card-img-top" alt="Card image cap" >
+            <% end %>
               <div class="card-body">
                 <h5 class="card-title"><%= post.title %></h5>
                 <p class="card-text"><%= truncate(post.description,:length => 10) %></p>
+                <%= link_to "Edit Post", edit_post_path(post)%>
+                <br>
+                <%= link_to "Delete", post_path(post), method: :delete, remote: true, class: "delete" %>
+                <br>
                 <%= link_to "Read Post", post %>
               </div>
-            </div>
+        </div>
     </div>
   <%end%>
 </div>
