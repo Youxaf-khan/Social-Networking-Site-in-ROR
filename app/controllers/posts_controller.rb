@@ -40,12 +40,12 @@ class PostsController < ApplicationController
 
   def destroy
     if @post.not_creator? current_user
-      flash.notice = 'This post belongs to someone else you are not authorized'
+      flash[:notice] = 'This post belongs to someone else you are not authorized'
       redirect_to root_path
     elsif @post.destroy
-      flash.notice = 'Post destroyed successfully'
+      flash.now[:notice] = 'Post destroyed successfully'
     else
-      flash.notice = 'Something went wrong'
+      flash[:notice] = 'Something went wrong'
       redirect_to root_path
     end
   end

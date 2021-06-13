@@ -12,4 +12,8 @@ class Post < ApplicationRecord
   def not_creator?(user_id)
     !creator? user_id
   end
+
+  def comments_limit_reached?
+    comments.count >= 5
+  end
 end
