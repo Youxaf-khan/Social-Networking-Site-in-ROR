@@ -5,11 +5,12 @@
 
 
 import 'bootstrap'
+import './stylesheets/application'
+
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-
 
 document.addEventListener("turbolinks:load",() =>{
 
@@ -29,3 +30,6 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+require("packs/custom");

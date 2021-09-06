@@ -1,20 +1,27 @@
 <%= link_to "New Post", new_post_path %>
 <br>
-<% @posts.each do |post| %>
-   <h2> <%= post.title %> </h2>
-   <div> <%= truncate(post.description,:length => 10) %> </div>
-   <br>
-  <div class="form-group">
-    <% if post.image.attached? %>
-    <%= image_tag post.image, style: "width: 200px; display: block" %>
-    <% end %>
-  </div>
- <%= link_to "Read Post", post %>
-   <br/>
-<%end%>
-
-<% if current_user %>
-<div class="actions">
-    <%= button_to "logout", destroy_user_session_path, method: :delete , class: 'btn btn-primary' %>
+<br>
+<br>
+<div class="container">
+ <div class="row justify-content-center">
+ <% @posts.each do |post| %>
+ <div class="card-deck mb-4 col-12 col-md-4">
+    <div id="del<%= post.id %>" class="card "  >
+            <%if post.image.attached?%>
+                <img src = <%= url_for(post.image) %> class="card-img-top" alt="Card image cap" >
+            <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= post.title %></h5>
+                <p class="card-text"><%= truncate(post.description,:length => 10) %></p>
+                <%= link_to "Edit Post", edit_post_path(post)%>
+                <br>
+                <%= link_to "Delete", post_path(post), method: :delete, remote: true, class: "delete" %>
+                <br>
+                <%= link_to "Read Post", post %>
+              </div>
+              <div class="w-100"></div>
+        </div>
+    </div>
+  <%end%>
+ </div>
 </div>
-<% end %>
